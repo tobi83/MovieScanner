@@ -46,14 +46,6 @@ import java.util.HashMap;
 
 
 public class MainActivity extends ActionBarActivity {
-
-    private Button btn_Scan;
-    private TextView tv_Barcode;
-    private TextView tv_Typ;
-    private TextView tv_Standort;
-    private TextView tv_Titel;
-    private WebView webView;
-
     private String barcode;
 
     @Override
@@ -61,8 +53,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
-
 
     public void startScan (View view) {
         IntentIntegrator integrator = new IntentIntegrator(this);
@@ -72,22 +62,12 @@ public class MainActivity extends ActionBarActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null) {
-            //String barcode;
-            String typ;
-
             barcode = scanResult.getContents();
-            typ = scanResult.getFormatName();
 
-            /*
-            tv_Barcode = (TextView) findViewById(R.id.tv_Barcode);
-            tv_Typ = (TextView) findViewById(R.id.tv_Typ);
-            tv_Standort = (TextView) findViewById(R.id.tv_Standort);
-            tv_Titel = (TextView) findViewById(R.id.tv_Titel);
-            tv_Barcode.setText("Barcode: " + barcode);
-            tv_Typ.setText("Barcode-Typ: " + typ);
-            tv_Titel.setText("Titel: Eyja Fjalla Joekull");
-            tv_Standort.setText("Standort: Regal A13");
-*/
+            // Der Barcode-Typ (Wird nicht benötigt, höchstens für Testzwecke
+            //String typ;
+            //typ = scanResult.getFormatName();
+
             WebView webview = new WebView(this);
             setContentView(webview);
 
@@ -95,10 +75,6 @@ public class MainActivity extends ActionBarActivity {
             webview.setVisibility(View.VISIBLE);
             webview.loadUrl("http://tmack.de/filmdatenbank/get_movie.php?barcode=" + barcode);
         }
-    }
-
-    public void FilmSuchen(View view) {
-
     }
 
     @Override
@@ -124,6 +100,9 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);*/
 
         switch (item.getItemId()) {
+            case R.id.scan:
+                IntentIntegrator integrator = new IntentIntegrator(this);
+                integrator.initiateScan();
             case R.id.quit:
                 System.exit(0);
                 return true;
