@@ -83,8 +83,6 @@ public class MainActivity extends ActionBarActivity {
             tv_Typ = (TextView) findViewById(R.id.tv_Typ);
             tv_Standort = (TextView) findViewById(R.id.tv_Standort);
             tv_Titel = (TextView) findViewById(R.id.tv_Titel);
-            */
-            /*
             tv_Barcode.setText("Barcode: " + barcode);
             tv_Typ.setText("Barcode-Typ: " + typ);
             tv_Titel.setText("Titel: Eyja Fjalla Joekull");
